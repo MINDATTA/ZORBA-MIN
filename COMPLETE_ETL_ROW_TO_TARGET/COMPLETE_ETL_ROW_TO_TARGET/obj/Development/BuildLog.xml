@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectInfo>
+    <Name>COMPLETE_ETL_ROW_TO_TARGET</Name>
+    <LastWriteTime>2019-09-16T13:53:53.0236802Z</LastWriteTime>
+    <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+  </ProjectInfo>
+  <LastBuildInfos>
+    <ProjectBuildItemInfo>
+      <Name>COMPLETE_ETL_ROW_TO_TARGET.dtsx</Name>
+      <LastWriteTime>2019-09-06T19:09:39.5887439Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>TARGET_ETL_LOAD_EMPLOYEE_ZORBA 4.dtsx</Name>
+      <LastWriteTime>2019-05-22T14:22:56.4873776Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>diff_source_load.dtsx</Name>
+      <LastWriteTime>2019-06-18T16:50:26.9796862Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>New_complete_car_load.dtsx</Name>
+      <LastWriteTime>2019-08-25T20:08:11.1006675Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>My_BOA_stmnt.dtsx</Name>
+      <LastWriteTime>2019-09-12T20:40:26.0683134Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>load_20_ffiles.dtsx</Name>
+      <LastWriteTime>2019-09-13T15:48:30.3924699Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+  </LastBuildInfos>
+</BuildLog>

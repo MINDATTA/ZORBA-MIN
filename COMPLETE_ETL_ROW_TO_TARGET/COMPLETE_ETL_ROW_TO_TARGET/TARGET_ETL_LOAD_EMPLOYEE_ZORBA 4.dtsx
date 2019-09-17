@@ -1,0 +1,1634 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/29/2019 6:40:28 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="1603-667QH72"
+  DTS:CreatorName="BHCS\e96315"
+  DTS:DTSID="{4EC23355-0AE3-492F-B18F-7BE89332A477}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="12.0.2430.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TARGET_ETL_LOAD_EMPLOYEE_ZORBA 4"
+  DTS:PackageType="5"
+  DTS:VersionBuild="70"
+  DTS:VersionGUID="{1A5311BB-2543-4CEB-AEAB-B06985137A39}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-CT7QN8A.ZORBA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8931FD19-0CA9-444A-ADEC-6B1529B7C7B1}"
+      DTS:ObjectName="DESKTOP-CT7QN8A.ZORBA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-CT7QN8A;Initial Catalog=ZORBA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-CT7QN8A.ZORBA1]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{89CD785D-66DE-4A77-AE8E-B0F966AAB90B}"
+      DTS:ObjectName="DESKTOP-CT7QN8A.ZORBA1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-CT7QN8A;Initial Catalog=ZORBA;Integrated Security=True;Application Name=SSIS-TARGET_ETL_LOAD_EMPLOYEE_ZORBA 4-{89CD785D-66DE-4A77-AE8E-B0F966AAB90B}DESKTOP-CT7QN8A.ZORBA1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C9D484E5-F141-489D-B71B-100B89D41655}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[User::Folder_path]+ @[User::File_Name]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\ZORBA_SQL_1003\SSIS\SOURCE\ZORBA_EMPLOYEE\EMPLOYEE_20190189.XLS;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{00DE1D0D-8204-45BB-B6A3-09B0A1FAF456}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::Folder_path] +  @[User::File_Name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ABC">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\ZORBA_SQL_1003\SSIS\SOURCE\ZORBA_EMPLOYEE\EMPLOYEE_20190189.XLS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{374ED23A-6DF9-4C77-A5CD-7B05A8E18848}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DESTINATION_FOLDER_PATH">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\ZORBA_SQL_1003\SSIS\DESTINATION\ZORBA_EMPLOYEE</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4CB97013-416C-486A-BB05-0A993AD1BCB3}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="REPLACE(  SUBSTRING(  (DT_WSTR,40) getdate() , 1, 10), &quot;:&quot;, &quot;_&quot;)"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Dynaimic_folder_name_GETDATE">
+      <DTS:VariableValue
+        DTS:DataType="8">2019-05-22</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ACCB7234-DFF2-4884-98C4-EFA9F9C2DE32}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="File_Name">
+      <DTS:VariableValue
+        DTS:DataType="8">EMPLOYEE_20190189.XLS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{56B0CD7D-3C16-48F3-93AE-F53FE54DBE93}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Folder_path">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\ZORBA_SQL_1003\SSIS\SOURCE\ZORBA_EMPLOYEE\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3F356CB8-3842-43FA-AC0A-59C1223EAEDB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::DESTINATION_FOLDER_PATH]+ &quot;\\&quot;+@[User::Dynaimic_folder_name_GETDATE]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FULL_PATH_FOR_DESTINATION_FOLDER">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\ZORBA_SQL_1003\SSIS\DESTINATION\ZORBA_EMPLOYEE\2019-05-22</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{42AFF501-C86E-4A03-8E71-5B108A8C1DDA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FULL_SOURCE_FILE_PATH">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D8336F7B-1864-4DF6-BF3F-7C36271FC5AC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::File_Name]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="V_FIRST_PART">
+      <DTS:VariableValue
+        DTS:DataType="8">EMPLOYEE_20190189.XLS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9346F4A0-C9A9-4FF6-8C7A-4328D3CF47F9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="v_to_capture_file_id">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\File System Task"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{A5D2CEFC-0A81-45DE-AF81-8ECD10933371}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="File System Task"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CreateDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="User::FULL_PATH_FOR_DESTINATION_FOLDER"
+          TaskIsSourceVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{5C7034AC-02B6-4B45-A318-4700CEF86FA7}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{FBD24A0F-24CF-4082-9120-3864D9814A58}"
+        DTS:ObjectName="{FBD24A0F-24CF-4082-9120-3864D9814A58}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\ZORBA_SQL_1003\SSIS\SOURCE\ZORBA_EMPLOYEE\" />
+            <FEFEProperty
+              FileSpec="EMPLOYEE_*.XLS" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{D92B7A29-5725-47C7-A742-F6778BBE41AE}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT_LOAD_EMPLOYEE_ZORBA"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Output].Columns[file_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Output].Columns[file_id]"
+                          name="file_id"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::v_to_capture_file_id]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::v_to_capture_file_id]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">Sheet1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_ID]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[EMP_ID]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_ID]"
+                          name="EMP_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_NAME]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[EMP_NAME]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_NAME]"
+                          name="EMP_NAME"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[SALARY]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[SALARY]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[SALARY]"
+                          name="SALARY"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[EMP_ID]"
+                          dataType="r8"
+                          name="EMP_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[EMP_NAME]"
+                          dataType="wstr"
+                          length="255"
+                          name="EMP_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].ExternalColumns[SALARY]"
+                          dataType="r8"
+                          name="SALARY" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[EMP_ID]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[EMP_ID]"
+                          name="EMP_ID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[EMP_NAME]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[EMP_NAME]"
+                          name="EMP_NAME" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[SALARY]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[SALARY]"
+                          name="SALARY" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[RAW_OM_EMPLOYEE_ZORBA]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DESKTOP-CT7QN8A.ZORBA]"
+                      connectionManagerRefId="Package.ConnectionManagers[DESKTOP-CT7QN8A.ZORBA]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMP_ID]"
+                          cachedDataType="r8"
+                          cachedName="EMP_ID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_ID]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_ID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMP_NAME]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="EMP_NAME"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_NAME]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[EMP_NAME]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SALARY]"
+                          cachedDataType="r8"
+                          cachedName="SALARY"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SALARY]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output].Columns[SALARY]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[file_id]"
+                          cachedDataType="i4"
+                          cachedName="file_id"
+                          externalMetadataColumnId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FILE_ID]"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Output].Columns[file_id]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_ID]"
+                          dataType="i4"
+                          name="EMP_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_NAME]"
+                          dataType="wstr"
+                          length="20"
+                          name="EMP_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SALARY]"
+                          dataType="r8"
+                          name="SALARY" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FILE_ID]"
+                          dataType="i4"
+                          name="FILE_ID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA.Paths[Excel Source Output]"
+                  endId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column.Inputs[Derived Column Input]"
+                  name="Excel Source Output"
+                  startId="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{DD357BC5-972E-4F30-A4DB-E7C83A90A757}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8931FD19-0CA9-444A-ADEC-6B1529B7C7B1}"
+              SQLTask:SqlStatementSource="EXEC OM_MERGE_TARGET ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@V_FILE_ID"
+                SQLTask:DtsVariableName="User::v_to_capture_file_id"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\File System Task"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{1BFA655B-8A53-42C4-8EF5-DBA8B150141E}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File System Task"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::ABC"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::FULL_PATH_FOR_DESTINATION_FOLDER"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\SP LOAD RAW TO STAGE"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6C7A2E97-140D-4D96-9ED0-C3A648688825}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SP LOAD RAW TO STAGE"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8931FD19-0CA9-444A-ADEC-6B1529B7C7B1}"
+              SQLTask:SqlStatementSource="EXEC OM_RAW_STAGE_LOAD" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\SP TO LOG FILENAME"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B0895F0E-1545-464C-A3B5-C0B5DD1582DC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SP TO LOG FILENAME"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{89CD785D-66DE-4A77-AE8E-B0F966AAB90B}"
+              SQLTask:IsStoredProc="True"
+              SQLTask:SqlStatementSource="OM_LOG_FILE_NAME" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@FILENAME"
+                SQLTask:DtsVariableName="User::File_Name"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="16"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@FILE_ID"
+                SQLTask:DtsVariableName="User::v_to_capture_file_id"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\TRUNCATE TABLE OM_EMPLOYEE_ZORBA"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DelayValidation="True"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3B8B9446-7C43-4609-8A0B-79AFA6AAB08A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATE TABLE OM_EMPLOYEE_ZORBA"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{8931FD19-0CA9-444A-ADEC-6B1529B7C7B1}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE RAW_OM_EMPLOYEE_ZORBA" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{9407F28C-6EE5-48E8-90A4-8D0FE0D448DE}"
+          DTS:From="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\SP LOAD RAW TO STAGE" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{46104975-238C-4346-8254-5C3BA6F20DE3}"
+          DTS:From="Package\Foreach Loop Container\TRUNCATE TABLE OM_EMPLOYEE_ZORBA"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{FB6411CA-B483-499E-A9CA-01E8FB34755F}"
+          DTS:From="Package\Foreach Loop Container\SP LOAD RAW TO STAGE"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container\Execute SQL Task" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{AE971E60-AA82-455A-86B9-D385726826E2}"
+          DTS:From="Package\Foreach Loop Container\SP TO LOG FILENAME"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Foreach Loop Container\TRUNCATE TABLE OM_EMPLOYEE_ZORBA" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{2BEFB455-094B-4A01-8D09-B52DC20DEEF9}"
+          DTS:From="Package\Foreach Loop Container\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Foreach Loop Container\File System Task" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{6FBDC064-F334-4D20-AA0E-1EFC2BBB9B8B}"
+          DTS:ObjectName="{6FBDC064-F334-4D20-AA0E-1EFC2BBB9B8B}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::File_Name" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\LOAD RAW TO STAGE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{5812E772-4280-4BD3-A238-081B9E809030}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LOAD RAW TO STAGE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\LOAD RAW TO STAGE\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\LOAD RAW TO STAGE\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\LOAD RAW TO STAGE\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Output].Columns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Output].Columns[LOAD_DATE]"
+                      name="LOAD_DATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\LOAD RAW TO STAGE\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LOAD RAW TO STAGE\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_OM_EMPLOYEE_ZORBA]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{D801EBBD-916C-4BDE-B0A4-72709BD7A8B1}:invalid"
+                  connectionManagerRefId="{D801EBBD-916C-4BDE-B0A4-72709BD7A8B1}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMP_ID]"
+                      cachedDataType="i4"
+                      cachedName="EMP_ID"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_ID]"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_ID]" />
+                    <inputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMP_NAME]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="EMP_NAME"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_NAME]"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_NAME]" />
+                    <inputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SALARY]"
+                      cachedDataType="r8"
+                      cachedName="SALARY"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SALARY]"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[SALARY]" />
+                    <inputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LOAD_DATE]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LOAD_DATE"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      lineageId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Output].Columns[LOAD_DATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Serial_num]"
+                      dataType="i4"
+                      name="Serial_num" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_ID]"
+                      dataType="i4"
+                      name="EMP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMP_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      name="EMP_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SALARY]"
+                      dataType="r8"
+                      name="SALARY" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LOAD_DATE]"
+                      dataType="dbTimeStamp"
+                      name="LOAD_DATE" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LOAD RAW TO STAGE\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[RAW_OM_EMPLOYEE_ZORBA]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{D801EBBD-916C-4BDE-B0A4-72709BD7A8B1}:invalid"
+                  connectionManagerRefId="{D801EBBD-916C-4BDE-B0A4-72709BD7A8B1}:invalid"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMP_ID]"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_ID]"
+                      name="EMP_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_NAME]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMP_NAME]"
+                      length="20"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[EMP_NAME]"
+                      name="EMP_NAME"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[SALARY]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SALARY]"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].Columns[SALARY]"
+                      name="SALARY"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMP_ID]"
+                      dataType="i4"
+                      name="EMP_ID" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EMP_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      name="EMP_NAME" />
+                    <externalMetadataColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SALARY]"
+                      dataType="r8"
+                      name="SALARY" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMP_ID]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMP_ID]"
+                      name="EMP_ID" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMP_NAME]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EMP_NAME]"
+                      name="EMP_NAME" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SALARY]"
+                      dataType="r8"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SALARY]"
+                      name="SALARY" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\LOAD RAW TO STAGE.Paths[Derived Column Output]"
+              endId="Package\LOAD RAW TO STAGE\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\LOAD RAW TO STAGE\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\LOAD RAW TO STAGE.Paths[OLE DB Source Output]"
+              endId="Package\LOAD RAW TO STAGE\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\LOAD RAW TO STAGE\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9E7316B2-949A-4093-93AD-EB0787BDD07C}"
+      DTS:From="Package\File System Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\File System Task"
+          TopLeft="241.142856276765,1.9058818467348" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA"
+          TopLeft="67.7222222222223,174.222222222222" />
+        <NodeLayout
+          Size="163.2,41.6"
+          Id="Package\Foreach Loop Container\Execute SQL Task"
+          TopLeft="138,326" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Foreach Loop Container\File System Task"
+          TopLeft="104.111111111111,398.444444444444" />
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Foreach Loop Container\SP LOAD RAW TO STAGE"
+          TopLeft="92.8888888888891,258" />
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\Foreach Loop Container\SP TO LOG FILENAME"
+          TopLeft="87.3333333333334,17.1111111111111" />
+        <NodeLayout
+          Size="279.2,41.6"
+          Id="Package\Foreach Loop Container\TRUNCATE TABLE OM_EMPLOYEE_ZORBA"
+          TopLeft="54.8888888888888,94.8888888888889" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="180.722222222222,216.222222222222">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.6666666666668,41.777777777778"
+              Start="0,0"
+              End="11.6666666666668,34.277777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.888888888889" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.888888888889"
+                    Point2="0,20.888888888889"
+                    Point3="4,20.888888888889" />
+                  <mssgle:LineSegment
+                    End="7.6666666666668,20.888888888889" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.6666666666668,20.888888888889"
+                    Point2="11.6666666666668,20.888888888889"
+                    Point3="11.6666666666668,24.888888888889" />
+                  <mssgle:LineSegment
+                    End="11.6666666666668,34.277777777778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="194.388888888889,136.888888888889">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-13.6666666666665,37.3333333333331"
+              Start="0,0"
+              End="-13.6666666666665,29.8333333333331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.6666666666665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.6666666666665"
+                    Point2="0,18.6666666666665"
+                    Point3="-4,18.6666666666665" />
+                  <mssgle:LineSegment
+                    End="-9.66666666666652,18.6666666666665" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.66666666666652,18.6666666666665"
+                    Point2="-13.6666666666665,18.6666666666665"
+                    Point3="-13.6666666666665,22.6666666666665" />
+                  <mssgle:LineSegment
+                    End="-13.6666666666665,29.8333333333331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="192.388888888889,300">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.1111111111109,26"
+              Start="0,0"
+              End="27.1111111111109,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9"
+                    Point2="0,13"
+                    Point3="4,13" />
+                  <mssgle:LineSegment
+                    End="23.1111111111109,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.1111111111109,13"
+                    Point2="27.1111111111109,13"
+                    Point3="27.1111111111109,17" />
+                  <mssgle:LineSegment
+                    End="27.1111111111109,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          TopLeft="178.833333333333,59.1111111111111">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="15.5555555555554,35.7777777777778"
+              Start="0,0"
+              End="15.5555555555554,28.2777777777778">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.8888888888889" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.8888888888889"
+                    Point2="0,17.8888888888889"
+                    Point3="4,17.8888888888889" />
+                  <mssgle:LineSegment
+                    End="11.5555555555554,17.8888888888889" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.5555555555554,17.8888888888889"
+                    Point2="15.5555555555554,17.8888888888889"
+                    Point3="15.5555555555554,21.8888888888889" />
+                  <mssgle:LineSegment
+                    End="15.5555555555554,28.2777777777778" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          TopLeft="219.5,368">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-36.388888888889,30.444444444444"
+              Start="0,0"
+              End="-36.388888888889,22.944444444444">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.222222222222" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.222222222222"
+                    Point2="0,15.222222222222"
+                    Point3="-4,15.222222222222" />
+                  <mssgle:LineSegment
+                    End="-32.388888888889,15.222222222222" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-32.388888888889,15.222222222222"
+                    Point2="-36.388888888889,15.222222222222"
+                    Point3="-36.388888888889,19.222222222222" />
+                  <mssgle:LineSegment
+                    End="-36.388888888889,22.944444444444" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="407.2,495.2"
+          Size="407.2,538.4"
+          Id="Package\Foreach Loop Container"
+          TopLeft="133.714284653566,65.3869266202749" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\LOAD RAW TO STAGE"
+          TopLeft="967.22222222222,157" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="241.142856276765,22.7058818467348">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.1714283768009,42.6810447735401"
+              Start="0,0"
+              End="96.1714283768009,35.1810447735401">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="92.1714283768009,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.1714283768009,0"
+                    Point2="96.1714283768009,0"
+                    Point3="96.1714283768009,4" />
+                  <mssgle:LineSegment
+                    End="96.1714283768009,35.1810447735401" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="DROP TABLE RAW_OM_EMPLOYEE_ZORBA&#xA;CREATE TABLE RAW_OM_EMPLOYEE_ZORBA&#xA;(&#xA; EMP_ID INT,&#xA; EMP_NAME NVARCHAR(20),&#xA; SALARY FLOAT&#xA;)&#xA;&#xA;SELECT * FROM RAW_OM_EMPLOYEE_ZORBA&#xA;&#xA;&#xA;----------stage&#xA;DROP TABLE stg_OM_EMPLOYEE_ZORBA&#xA;CREATE TABLE stg_OM_EMPLOYEE_ZORBA&#xA;(&#xA; Serial_num int IDENTITY(1,1),&#xA; EMP_ID INT,&#xA; EMP_NAME NVARCHAR(20),&#xA; SALARY FLOAT,&#xA; LOAD_DATE DATETIME&#xA;)&#xA;&#xA;SELECT * FROM RAW_OM_EMPLOYEE_ZORBA&#xA;SELECT * FROM stg_OM_EMPLOYEE_ZORBA&#xA;&#xA;TRUNCATE TABLE stg_OM_EMPLOYEE_ZORBA&#xA;&#xA;DROP PROC OM_RAW_STAGE_LOAD&#xA;CREATE PROC OM_RAW_STAGE_LOAD&#xA;AS&#xA;BEGIN&#xA;&#xA;INSERT INTO stg_OM_EMPLOYEE_ZORBA  (EMP_ID, EMP_NAME, SALARY, LOAD_DATE)&#xA;&#xA;&#xA;SELECT &#xA; EMP_ID, &#xA; UPPER(LTRIM(RTRIM(EMP_NAME))), &#xA; CONVERT(DECIMAL (6, 2), SALARY),&#xA; GETDATE()&#xA;FROM RAW_OM_EMPLOYEE_ZORBA&#xA;&#xA;END&#xA;&#xA;EXEC OM_RAW_STAGE_LOAD&#xA;&#xA;--TO LOG FILENAME&#xA;DROP TABLE OM_LOG_FILENAME&#xA;CREATE TABLE OM_LOG_FILENAME&#xA;(&#xA; FILENAME_ID INT IDENTITY(1,1),&#xA; FILE_NAME VARCHAR(100) PRIMARY KEY,&#xA; LOAD_DTM DATETIME  &#xA;)&#xA;&#xA;DROP PROC OM_LOG_FILE_NAME&#xA;CREATE PROCEDURE OM_LOG_FILE_NAME @FILENAME VARCHAR(100)&#xA;AS&#xA;BEGIN&#xA;INSERT INTO OM_LOG_FILENAME (FILE_NAME, LOAD_DTM)&#xA;VALUES (@FILENAME, GETDATE())&#xA;END&#xA;&#xA;EXEC OM_LOG_FILE_NAME 'RAM1.ABC'&#xA;&#xA;SELECT * FROM OM_LOG_FILENAME&#xA;&#xA;TRUNCATE TABLE OM_LOG_FILENAME"
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="483.2,1109.6"
+          Id="d717c066-ca90-4c18-af2d-43f52c819114"
+          TopLeft="742,273" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination"
+          TopLeft="366,284" />
+        <NodeLayout
+          Size="139.2,41.6"
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source"
+          TopLeft="185,68" />
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Derived Column"
+          TopLeft="369,147" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA.Paths[Excel Source Output]"
+          TopLeft="254.5,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="191.5,37"
+              Start="0,0"
+              End="191.5,29.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.5"
+                    Point2="0,18.5"
+                    Point3="4,18.5" />
+                  <mssgle:LineSegment
+                    End="187.5,18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="187.5,18.5"
+                    Point2="191.5,18.5"
+                    Point3="191.5,22.5" />
+                  <mssgle:LineSegment
+                    End="191.5,29.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA.Paths[Derived Column Output]"
+          TopLeft="448.75,189">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,95"
+              Start="0,0"
+              End="0,87.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,87.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\DFT_LOAD_EMPLOYEE_ZORBA\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\LOAD RAW TO STAGE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\LOAD RAW TO STAGE\OLE DB Destination"
+          TopLeft="393,246" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\LOAD RAW TO STAGE\Derived Column"
+          TopLeft="319,170" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\LOAD RAW TO STAGE\OLE DB Source"
+          TopLeft="199,54" />
+        <EdgeLayout
+          Id="Package\LOAD RAW TO STAGE.Paths[OLE DB Source Output]"
+          TopLeft="274,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122,74"
+              Start="0,0"
+              End="122,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="118,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="118,37"
+                    Point2="122,37"
+                    Point3="122,41" />
+                  <mssgle:LineSegment
+                    End="122,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\LOAD RAW TO STAGE.Paths[Derived Column Output]"
+          TopLeft="396,212">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="82.5,34"
+              Start="0,0"
+              End="82.5,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13"
+                    Point2="0,17"
+                    Point3="4,17" />
+                  <mssgle:LineSegment
+                    End="78.5,17" />
+                  <mssgle:CubicBezierSegment
+                    Point1="78.5,17"
+                    Point2="82.5,17"
+                    Point3="82.5,21" />
+                  <mssgle:LineSegment
+                    End="82.5,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD RAW TO STAGE\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LOAD RAW TO STAGE\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
